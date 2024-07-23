@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Courses - Students</title>
+</head>
+
+<body>
+    <h1>Courses - Students</h1>
+    <h2>Available Courses</h2>
+    <ul id="coursesList"></ul>
+
+    <script>
+        function updateCourseList(event) {
+            var courseName = event.detail;
+            var coursesList = document.getElementById('coursesList');
+            var li = document.createElement('li');
+            li.textContent = courseName;
+            coursesList.appendChild(li);
+        }
+
+        function displayCourses() {
+            var courses = JSON.parse(localStorage.getItem('courses')) || [];
+            var coursesList = document.getElementById('coursesList');
+            coursesList.innerHTML = '';
+            courses.forEach(function(course) {
+                var li = document.createElement('li');
+                li.textContent = course;
+                coursesList.appendChild(li);
+            });
+        }
+
+        window.onload = function() {
+            displayCourses(); // Display courses when page loads
+
+            // Listen for courseUpdate event from other tabs (teacher page)
+            window.addEventListener('courseUpdate', function(event) {
+                updateCourseList(event); // Update course list when event is received
+            });
+        };
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

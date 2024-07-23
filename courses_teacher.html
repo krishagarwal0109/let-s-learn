@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Courses - Teacher</title>
+</head>
+
+<body>
+    <h1>Courses - Teacher</h1>
+    <button onclick="addCourse()">Add Course</button>
+    <h2>Available Courses</h2>
+    <ul id="coursesList"></ul>
+
+    <script>
+        function addCourse() {
+            var courseName = prompt('Enter course name:');
+            if (courseName) {
+                var courses = JSON.parse(localStorage.getItem('courses')) || [];
+                courses.push(courseName);
+                localStorage.setItem('courses', JSON.stringify(courses));
+                displayCourses();
+                // Send a message to other tabs (students page) to update their course list
+                broadcastCourseUpdate(courseName);
+            }
+        }
+
+        function displayCourses() {
+            var courses = JSON.parse(localStorage.getItem('courses')) || [];
+            var coursesList = document.getElementById('coursesList');
+            coursesList.innerHTML = '';
+            courses.forEach(function(course) {
+                var li = document.createElement('li');
+                li.textContent = course;
+                coursesList.appendChild(li);
+            });
+        }
+
+        function broadcastCourseUpdate(courseName) {
+            var courseUpdateEvent = new CustomEvent('courseUpdate', { detail: courseName });
+            window.dispatchEvent(courseUpdateEvent);
+        }
+
+        window.onload = function() {
+            displayCourses();
+        };
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+

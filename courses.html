@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Courses</title>
+    <link rel="stylesheet" href="courses.css">
+    <script src="courses.js"></script>
+</head>
+
+<body>
+    <h1>Courses</h1>
+
+    <div id="addCourseSection" style="display: none;">
+        <label for="courseName">Course Name:</label>
+        <input type="text" id="courseName" placeholder="Enter course name">
+        <button onclick="addCourse()">Add Course</button>
+    </div>
+
+    <h2>Available Courses</h2>
+    <ul id="coursesList"></ul>
+
+    <div id="enrolledCoursesSection" style="display: none;">
+        <h2>Courses Enrolled In</h2>
+        <ul id="enrolledCoursesList"></ul>
+    </div>
+</body>
+
+</html>
+
+
